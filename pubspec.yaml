@@ -1,19 +1,29 @@
 name: product_viewer
-description: "A new Flutter project."
+description: "Simple product viewer project utilizing fakestoreapi.com"
 publish_to: 'none'
 version: 0.1.0
 
 environment:
   sdk: ^3.5.2
+  flutter: ">=3.24.0"
 
 dependencies:
+  bloc: ^8.1.4
+  build_runner: ^2.4.12
+  dio: ^5.7.0
+  equatable: ^2.0.5
   flutter:
     sdk: flutter
+  json_annotation: ^4.9.0
+  logger: ^2.4.0
+  skeletonizer: ^1.4.2
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+  json_serializable: ^6.8.0
 
 flutter:
   uses-material-design: true
