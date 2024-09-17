@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:product_viewer/features/products/widgets/products_list.dart';
 import 'package:product_viewer/widgets/scaffolds/basic_scaffold.dart';
+
+import 'core/repo_locator/locator.dart';
+import 'features/products/repositories/product_repository.dart';
+import 'features/products/state/products_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const BasicScaffold(
+    return BasicScaffold(
       withGradient: true,
-      body: Center(child: Text('Hello world!')),
+      body: BlocProvider(
+        create: (context) => ProductBloc(productRepository: locator<ProductRepository>()),
+        child: const ProductsList(),
+      ),
     );
   }
 }

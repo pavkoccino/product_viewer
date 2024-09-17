@@ -15,7 +15,7 @@ const ColorScheme lightColorScheme = ColorScheme(
   onSecondaryContainer: Color(0xFF664500), // Dark orange-brown text on container
 
   // Error
-  error: Color(0xFFFF8A65), // Light coral
+  error: Color(0xFFF52E5C), // Light coral
   onError: Color(0xFF000000), // Black text on error
   errorContainer: Color(0xFFFFE0B2), // Very light orange (same as secondaryContainer)
   onErrorContainer: Color(0xFF662500), // Dark red-brown text on container
