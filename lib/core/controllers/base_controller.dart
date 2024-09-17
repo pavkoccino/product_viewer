@@ -1,20 +1,18 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:product_viewer/api/controllers/log_interceptor.dart';
+import 'package:product_viewer/core/constants.dart';
+import 'package:product_viewer/core/controllers/log_interceptor.dart';
 import 'package:product_viewer/utils/logger.dart';
 
 typedef JSON = Map<String, dynamic>;
 
 class BaseController {
   final _log = getLogger(BaseController);
-  final String baseUrl;
-  final Dio _dio;
+  late final Dio _dio;
 
-  BaseController({
-    required this.baseUrl,
-    required Dio dio,
-  }) : _dio = dio {
+  BaseController() {
+    _dio = Dio();
     _dio.options = BaseOptions(
       baseUrl: baseUrl,
       connectTimeout: const Duration(seconds: 15),

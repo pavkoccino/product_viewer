@@ -17,7 +17,7 @@ Logger getLogger(Object object) {
 /// Format: \[I\] (ClassName) Some log message
 class _CustomPrinter extends LogPrinter {
   final Object className;
-  final bool colors = false;
+  final bool colors = true;
   final bool emojis = false;
 
   _CustomPrinter(this.className);
