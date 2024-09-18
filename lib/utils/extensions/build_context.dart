@@ -4,8 +4,15 @@ import 'package:product_viewer/app/theme/extensions/custom_color_scheme.dart';
 import 'package:product_viewer/app/theme/extensions/padding_scheme.dart';
 
 extension BuildContextExt on BuildContext {
-  double get screenHeight => MediaQuery.of(this).size.height;
-  double get screenWidth => MediaQuery.of(this).size.width;
+  double get screenHeight {
+    final size = MediaQuery.of(this).size;
+    return size.height > size.width ? size.height : size.width;
+  }
+
+  double get screenWidth {
+    final size = MediaQuery.of(this).size;
+    return size.width < size.height ? size.width : size.height;
+  }
 
   // Material theme
   ColorScheme get colorScheme => _theme.colorScheme;

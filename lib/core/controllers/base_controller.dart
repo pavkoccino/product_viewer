@@ -14,7 +14,7 @@ class BaseController {
   BaseController() {
     _dio = Dio();
     _dio.options = BaseOptions(
-      baseUrl: baseUrl,
+      baseUrl: Constants.baseUrl,
       connectTimeout: const Duration(seconds: 15),
     );
     _dio.interceptors.addAll([

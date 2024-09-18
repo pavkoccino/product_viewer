@@ -24,4 +24,6 @@ class ProductModel {
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => _$ProductModelFromJson(json);
+
+  String get priceWithCurrency => '${price.toStringAsFixed(2)} EUR';
 }

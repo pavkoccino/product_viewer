@@ -60,10 +60,11 @@ class AppTheme {
         side: BorderSide(color: theme.colorScheme.outline),
       ),
       cardTheme: CardTheme(
-        elevation: 0,
+        elevation: 2,
         surfaceTintColor: Colors.transparent,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(24),
+          side: BorderSide(color: theme.colorScheme.outline.withOpacity(0.7), width: 1),
         ),
       ),
       bottomNavigationBarTheme: theme.bottomNavigationBarTheme.copyWith(

@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
       centerTitle: false,
       body: BlocProvider(
         create: (context) => ProductBloc(productRepository: locator<ProductRepository>()),
-        child: const ProductsList(),
+        child: ListView(physics: const BouncingScrollPhysics(), children: const [ProductsList()]),
       ),
     );
   }

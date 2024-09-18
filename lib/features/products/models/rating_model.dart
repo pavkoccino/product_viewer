@@ -13,4 +13,6 @@ class RatingModel {
   });
 
   factory RatingModel.fromJson(Map<String, dynamic> json) => _$RatingModelFromJson(json);
+
+  String get rateString => rate.toStringAsFixed(1);
 }
