@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:product_viewer/app/router/router_config.dart';
 import 'package:product_viewer/app/theme/app_theme.dart';
 import 'package:product_viewer/utils/extensions/build_context.dart';
 
 class App extends StatelessWidget {
-  final Widget root;
-  const App({super.key, required this.root});
+  App({super.key});
+
+  final _router = AppRouter();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
         debugShowCheckedModeBanner: false,
         theme: AppTheme().appThemeLight,
-        builder: (context, _) {
+        routerConfig: _router.config(),
+        builder: (context, widget) {
           return AnnotatedRegion<SystemUiOverlayStyle>(
             value: SystemUiOverlayStyle(
               // iOS only
@@ -22,7 +25,7 @@ class App extends StatelessWidget {
               statusBarColor: context.customColorScheme.transparent,
               systemNavigationBarColor: context.colorScheme.surface,
             ),
-            child: root,
+            child: widget ?? const Text('Něco se pokazilo'),
           );
         });
   }
