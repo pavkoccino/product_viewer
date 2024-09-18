@@ -6,10 +6,10 @@ import 'package:product_viewer/core/repo_locator/locator.dart';
 import 'package:product_viewer/features/products/models/product_model.dart';
 import 'package:product_viewer/features/products/repositories/product_repository.dart';
 import 'package:product_viewer/features/products/state/bloc.dart';
+import 'package:product_viewer/features/products/widgets/product_card.dart';
 import 'package:product_viewer/utils/extensions/build_context.dart';
 import 'package:product_viewer/widgets/loading/my_bloc_builder.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 class ProductsList extends StatefulWidget {
   const ProductsList({super.key});
@@ -56,70 +56,7 @@ class _ProductsListState extends State<ProductsList> {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  child: Card(
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.all(context.paddingScheme.p4),
-                            child: FadeInImage(
-                              image: NetworkImage(product.image),
-                              placeholder: MemoryImage(kTransparentImage),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          height: context.screenHeight * 0.5 * 0.25,
-                          padding: EdgeInsets.fromLTRB(context.paddingScheme.p3, context.paddingScheme.p2,
-                              context.paddingScheme.p3, context.paddingScheme.p3),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(context.borderRadiusScheme.r5),
-                              bottomRight: Radius.circular(context.borderRadiusScheme.r5),
-                            ),
-                            border: Border.all(color: context.colorScheme.outline.withOpacity(0.7), width: 1),
-                            color: context.colorScheme.outline.withOpacity(0.4),
-                          ),
-                          width: double.infinity,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                product.title,
-                                maxLines: 2,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    product.priceWithCurrency,
-                                    style: context.textTheme.titleSmall,
-                                  ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        product.rating.rateString,
-                                        style: context.textTheme.titleSmall,
-                                      ),
-                                      Gap(context.paddingScheme.p1),
-                                      Icon(
-                                        Icons.star,
-                                        color: context.colorScheme.inversePrimary,
-                                        size: 20,
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+                  child: ProductCard(product: product),
                 ),
               );
             },
