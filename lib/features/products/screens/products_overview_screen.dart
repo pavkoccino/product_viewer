@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:product_viewer/core/repo_locator/locator.dart';
 import 'package:product_viewer/features/products/repositories/product_repository.dart';
 import 'package:product_viewer/features/products/state/products_bloc.dart';
+import 'package:product_viewer/features/products/state/products_event.dart';
 import 'package:product_viewer/features/products/widgets/products_list.dart';
 import 'package:product_viewer/utils/extensions/build_context.dart';
 import 'package:product_viewer/widgets/scaffolds/basic_scaffold.dart';
@@ -21,7 +22,14 @@ class ProductsOverviewScreen extends StatelessWidget {
       centerTitle: false,
       body: BlocProvider(
         create: (context) => ProductBloc(productRepository: locator<ProductRepository>()),
-        child: ListView(physics: const BouncingScrollPhysics(), children: const [ProductsList()]),
+        child: Builder(builder: (context) {
+          return RefreshIndicator(
+              onRefresh: () async {
+                final productBloc = BlocProvider.of<ProductBloc>(context);
+                productBloc.add(const LoadProductsEvent());
+              },
+              child: ListView(physics: const BouncingScrollPhysics(), children: const [ProductsList()]));
+        }),
       ),
     );
   }
