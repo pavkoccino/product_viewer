@@ -19,6 +19,8 @@ class InternetConnectionWrapper extends StatefulWidget {
 
 class _InternetConnectionWrapperState extends State<InternetConnectionWrapper> {
   late final StreamSubscription<List<ConnectivityResult>> subscription;
+  bool connectionGotLostBefore = false;
+
   @override
   initState() {
     super.initState();
@@ -30,9 +32,11 @@ class _InternetConnectionWrapperState extends State<InternetConnectionWrapper> {
 
   void _handleConnectivityChange(List<ConnectivityResult> result) {
     if (result.contains(ConnectivityResult.none)) {
+      connectionGotLostBefore = true;
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBarFactory.info(duration: const Duration(days: 365), content: const NotConnected()));
-    } else {
+    } else if (!result.contains(ConnectivityResult.none) && connectionGotLostBefore) {
+      connectionGotLostBefore = false;
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(SnackBarFactory.info(content: const ConnectionRegained()));
