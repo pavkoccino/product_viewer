@@ -1,12 +1,15 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:product_viewer/app/router/router_config.gr.dart';
 import 'package:product_viewer/core/constants.dart';
 import 'package:product_viewer/core/repo_locator/locator.dart';
 import 'package:product_viewer/features/products/models/product_model.dart';
 import 'package:product_viewer/features/products/repositories/product_repository.dart';
 import 'package:product_viewer/features/products/state/bloc.dart';
 import 'package:product_viewer/features/products/widgets/product_card.dart';
+import 'package:product_viewer/features/products/widgets/product_card_bottom.dart';
 import 'package:product_viewer/utils/extensions/build_context.dart';
 import 'package:product_viewer/widgets/loading/my_bloc_builder.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -56,7 +59,11 @@ class _ProductsListState extends State<ProductsList> {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  child: ProductCard(product: product),
+                  child: ProductCard(
+                    product: product,
+                    onCardTap: () => context.router.push(ProductDetailRoute(product: product)),
+                    bottomPart: ProductCardBottom(product: product),
+                  ),
                 ),
               );
             },
