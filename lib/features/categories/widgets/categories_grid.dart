@@ -4,6 +4,7 @@ import 'package:product_viewer/core/repo_locator/locator.dart';
 import 'package:product_viewer/features/categories/state/bloc.dart';
 import 'package:product_viewer/features/products/repositories/product_repository.dart';
 import 'package:product_viewer/utils/extensions/build_context.dart';
+import 'package:product_viewer/utils/extensions/list_widget.dart';
 import 'package:product_viewer/utils/extensions/string.dart';
 import 'package:product_viewer/widgets/containers/circle_gradient_container.dart';
 import 'package:product_viewer/widgets/loading/my_bloc_builder.dart';
@@ -73,7 +74,7 @@ class _CategoriesGridState extends State<CategoriesGrid> {
             );
           },
         ),
-      ],
+      ].withSpaceBetween(),
     );
   }
 }
