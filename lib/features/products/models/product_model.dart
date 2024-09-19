@@ -3,7 +3,7 @@ import 'package:product_viewer/features/products/models/rating_model.dart';
 
 part 'generated/product_model.g.dart';
 
-@JsonSerializable(createToJson: false)
+@JsonSerializable()
 class ProductModel {
   final int id;
   final String title;
@@ -24,6 +24,8 @@ class ProductModel {
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => _$ProductModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ProductModelToJson(this);
 
   String get priceWithCurrency => '${price.toStringAsFixed(2)} EUR';
 }

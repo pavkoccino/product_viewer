@@ -24,7 +24,7 @@ class BlocLoaded<T> extends BlocState<T> {
   const BlocLoaded(this.data);
 
   @override
-  List<Object?> get props => [data];
+  List<Object?> get props => (T is List) ? data as List : [data];
 }
 
 class BlocError<T> extends BlocState<T> {

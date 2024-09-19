@@ -11,17 +11,20 @@ dependencies:
   auto_route: ^9.2.2
   bloc: ^8.1.4
   build_runner: ^2.4.12
+  cached_network_image: ^3.4.1
   connectivity_plus: ^6.0.5
   dio: ^5.7.0
   equatable: ^2.0.5
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
+  flutter_cache_manager: ^3.4.1
   gap: ^3.0.1
   get_it: ^7.7.0
-  google_fonts: ^6.2.1
+  hydrated_bloc: ^9.1.5
   json_annotation: ^4.9.0
   logger: ^2.4.0
+  path_provider: ^2.1.4
   skeletonizer: ^1.4.2
   transparent_image: ^2.0.1
 

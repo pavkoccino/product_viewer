@@ -15,3 +15,14 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel(
       image: json['image'] as String,
       rating: RatingModel.fromJson(json['rating'] as Map<String, dynamic>),
     );
+
+Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'title': instance.title,
+      'price': instance.price,
+      'description': instance.description,
+      'category': instance.category,
+      'image': instance.image,
+      'rating': instance.rating,
+    };

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 final textTheme = TextTheme(
   displayLarge: _font(size: 32, weight: FontWeight.w700),
@@ -45,9 +44,10 @@ const TextStyle _undefinedFont = TextStyle(
 );
 
 TextStyle _font({required double size, required FontWeight weight}) {
-  return GoogleFonts.urbanist(
+  return TextStyle(
     fontSize: size,
     fontWeight: weight,
     letterSpacing: -0.15,
+    fontFamily: 'Roboto',
   );
 }

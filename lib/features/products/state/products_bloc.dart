@@ -1,11 +1,11 @@
-import 'package:bloc/bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:product_viewer/core/bloc_generic/bloc_states.dart';
 import 'package:product_viewer/features/products/models/product_model.dart';
 import 'package:product_viewer/features/products/repositories/product_repository.dart';
 import 'package:product_viewer/features/products/state/bloc.dart';
 import 'package:product_viewer/utils/logger.dart';
 
-class ProductBloc extends Bloc<ProductEvent, ProductState> {
+class ProductBloc extends HydratedBloc<ProductEvent, ProductState> {
   final ProductRepository productRepository;
 
   final _log = getLogger(ProductBloc);
@@ -17,14 +17,65 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     LoadProductsEvent event,
     Emitter<ProductState> emit,
   ) async {
-    emit(const BlocLoading<List<ProductModel>>());
+    // To not emit Loading if we have some products loaded from cache
+    if (state is! BlocLoaded<List<ProductModel>>) {
+      _log.d('ProductState - emitting loading state');
+      emit(const BlocLoading<List<ProductModel>>());
+    }
+
     try {
-      // Replace with your data fetching logic
       final products = await productRepository.getAllProducts();
+      _log.i('ProductState - ${products.length} products loaded from BE');
       emit(BlocLoaded<List<ProductModel>>(products));
     } catch (e) {
       _log.e(e);
-      emit(BlocError<List<ProductModel>>(e is Exception ? e : Exception(e.toString())));
+      if (state is BlocLoaded<List<ProductModel>>) {
+        _log.w('ProductState - cached data are used as a fallback');
+      } else {
+        emit(BlocError<List<ProductModel>>(e is Exception ? e : Exception(e.toString())));
+      }
     }
   }
+
+  @override
+  ProductState? fromJson(Map<String, dynamic> json) {
+    try {
+      final productsJson = json['products'] as List<dynamic>?;
+      if (productsJson != null && productsJson.isNotEmpty) {
+        final products =
+            productsJson.map((productJson) => ProductModel.fromJson(productJson as Map<String, dynamic>)).toList();
+        _log.i('ProductState cache loaded, ${products.length} products loaded');
+        return BlocLoaded<List<ProductModel>>(products);
+      }
+    } catch (e) {
+      _log.e('Failed to deserialize ProductState: $e');
+    }
+    return null;
+  }
+
+  @override
+  Map<String, dynamic>? toJson(ProductState state) {
+    if (state is BlocLoaded<List<ProductModel>> && state.data.isNotEmpty) {
+      final productsJsonified = state.data.map((product) => product.toJson()).toList();
+      _log.i('Writing ${productsJsonified.length} products to cache');
+      return {'products': productsJsonified};
+    }
+    return null;
+  }
+
+  // @override
+  // Map<String, dynamic>? toJson(ProductState state) {
+  //   if (state.props.isNotEmpty && state.props.first is List<ProductModel>) {
+  //     final jsonifiedList = [];
+  //     for (final product in state.props.first as List<ProductModel>) {
+  //       jsonifiedList.add(product.toJson());
+  //     }
+  //     _log.i('Saving ${jsonifiedList.length} products to cache');
+  //     return {
+  //       'products': jsonifiedList,
+  //     };
+  //   } else {
+  //     return null;
+  //   }
+  // }
 }
