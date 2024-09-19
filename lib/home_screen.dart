@@ -14,8 +14,8 @@ import 'package:product_viewer/utils/extensions/list_widget.dart';
 import 'package:product_viewer/widgets/scaffolds/basic_scaffold.dart';
 
 @RoutePage()
-class ProductsOverviewScreen extends StatelessWidget {
-  const ProductsOverviewScreen({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

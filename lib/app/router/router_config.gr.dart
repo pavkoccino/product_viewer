@@ -13,12 +13,30 @@ import 'package:flutter/material.dart' as _i4;
 import 'package:product_viewer/features/products/models/product_model.dart'
     as _i5;
 import 'package:product_viewer/features/products/screens/product_detail_screen.dart'
-    as _i1;
-import 'package:product_viewer/features/products/screens/products_overview_screen.dart'
     as _i2;
+import 'package:product_viewer/home_screen.dart' as _i1;
 
 /// generated route for
-/// [_i1.ProductDetailScreen]
+/// [_i1.HomeScreen]
+class HomeRoute extends _i3.PageRouteInfo<void> {
+  const HomeRoute({List<_i3.PageRouteInfo>? children})
+      : super(
+          HomeRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'HomeRoute';
+
+  static _i3.PageInfo page = _i3.PageInfo(
+    name,
+    builder: (data) {
+      return const _i1.HomeScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [_i2.ProductDetailScreen]
 class ProductDetailRoute extends _i3.PageRouteInfo<ProductDetailRouteArgs> {
   ProductDetailRoute({
     _i4.Key? key,
@@ -39,7 +57,7 @@ class ProductDetailRoute extends _i3.PageRouteInfo<ProductDetailRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<ProductDetailRouteArgs>();
-      return _i1.ProductDetailScreen(
+      return _i2.ProductDetailScreen(
         key: args.key,
         product: args.product,
       );
@@ -61,23 +79,4 @@ class ProductDetailRouteArgs {
   String toString() {
     return 'ProductDetailRouteArgs{key: $key, product: $product}';
   }
-}
-
-/// generated route for
-/// [_i2.ProductsOverviewScreen]
-class ProductsOverviewRoute extends _i3.PageRouteInfo<void> {
-  const ProductsOverviewRoute({List<_i3.PageRouteInfo>? children})
-      : super(
-          ProductsOverviewRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'ProductsOverviewRoute';
-
-  static _i3.PageInfo page = _i3.PageInfo(
-    name,
-    builder: (data) {
-      return const _i2.ProductsOverviewScreen();
-    },
-  );
 }
