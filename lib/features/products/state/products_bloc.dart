@@ -19,18 +19,18 @@ class ProductBloc extends HydratedBloc<ProductEvent, ProductState> {
   ) async {
     // To not emit Loading if we have some products loaded from cache
     if (state is! BlocLoaded<List<ProductModel>>) {
-      _log.d('ProductState - emitting loading state');
+      _log.d('Emitting loading state');
       emit(const BlocLoading<List<ProductModel>>());
     }
 
     try {
       final products = await productRepository.getAllProducts();
-      _log.i('ProductState - ${products.length} products loaded from BE');
+      _log.i('${products.length} products loaded from BE');
       emit(BlocLoaded<List<ProductModel>>(products));
     } catch (e) {
       _log.e(e);
       if (state is BlocLoaded<List<ProductModel>>) {
-        _log.w('ProductState - cached data are used as a fallback');
+        _log.w('Cached data are used as a fallback');
       } else {
         emit(BlocError<List<ProductModel>>(e is Exception ? e : Exception(e.toString())));
       }
@@ -44,7 +44,7 @@ class ProductBloc extends HydratedBloc<ProductEvent, ProductState> {
       if (productsJson != null && productsJson.isNotEmpty) {
         final products =
             productsJson.map((productJson) => ProductModel.fromJson(productJson as Map<String, dynamic>)).toList();
-        _log.i('ProductState cache loaded, ${products.length} products loaded');
+        _log.i('Cache loaded, ${products.length} products loaded');
         return BlocLoaded<List<ProductModel>>(products);
       }
     } catch (e) {
@@ -62,20 +62,4 @@ class ProductBloc extends HydratedBloc<ProductEvent, ProductState> {
     }
     return null;
   }
-
-  // @override
-  // Map<String, dynamic>? toJson(ProductState state) {
-  //   if (state.props.isNotEmpty && state.props.first is List<ProductModel>) {
-  //     final jsonifiedList = [];
-  //     for (final product in state.props.first as List<ProductModel>) {
-  //       jsonifiedList.add(product.toJson());
-  //     }
-  //     _log.i('Saving ${jsonifiedList.length} products to cache');
-  //     return {
-  //       'products': jsonifiedList,
-  //     };
-  //   } else {
-  //     return null;
-  //   }
-  // }
 }

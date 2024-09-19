@@ -5,6 +5,9 @@ import 'package:product_viewer/features/products/models/rating_model.dart';
 abstract class ProductRepository {
   Future<List<ProductModel>> getAllProducts();
   List<ProductModel> mockProducts(int count);
+
+  Future<List<String>> getCategories();
+  List<String> mockCategories(int count);
 }
 
 class ProductRepositoryImpl extends BaseController implements ProductRepository {
@@ -16,6 +19,17 @@ class ProductRepositoryImpl extends BaseController implements ProductRepository 
   Future<List<ProductModel>> getAllProducts() async {
     final response = await getJsonList(path);
     return response.map(ProductModel.fromJson).toList();
+  }
+
+  @override
+  Future<List<String>> getCategories() async {
+    final response = await getDynamicRequest('$path/categories');
+    return List<String>.from(response);
+  }
+
+  @override
+  List<String> mockCategories(int count) {
+    return List.generate(count, (index) => 'Category ${index + 1}');
   }
 
   @override
