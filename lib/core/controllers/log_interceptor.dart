@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:product_viewer/utils/logger.dart';
 
+/// Logging interceptor to be added to dio interceptors
 class DioLoggingInterceptors extends InterceptorsWrapper {
   final log = getLogger(DioLoggingInterceptors);
 

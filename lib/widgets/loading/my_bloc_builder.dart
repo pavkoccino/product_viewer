@@ -5,6 +5,12 @@ import 'package:product_viewer/widgets/loading/custom_skeletonizer.dart';
 import 'package:product_viewer/widgets/loading/my_linear_progress_indicator.dart';
 import 'package:product_viewer/widgets/warnings/loading_failed.dart';
 
+/// A custom BlocBuilder widget that handles various bloc states (loading, error, loaded)
+/// and provides specific UI elements based on the state:
+/// - Shows a custom skeleton loader when data is loading, using optional mock data if provided.
+/// - Displays a progress indicator if no mock data is available during loading.
+/// - Shows an error widget when the state is an error.
+/// - Renders the provided builder function when the state has loaded successfully.
 class MyBlocBuilder<B extends BlocBase<S>, S extends BlocState<T>, T> extends StatelessWidget {
   final Widget Function(BuildContext context, T data) builder;
   final T? mockDataToSkeletonize;

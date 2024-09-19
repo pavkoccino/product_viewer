@@ -4,7 +4,6 @@ import 'package:product_viewer/core/repo_locator/locator.dart';
 import 'package:product_viewer/features/categories/state/bloc.dart';
 import 'package:product_viewer/features/products/repositories/product_repository.dart';
 import 'package:product_viewer/utils/extensions/build_context.dart';
-import 'package:product_viewer/utils/extensions/list_widget.dart';
 import 'package:product_viewer/utils/extensions/string.dart';
 import 'package:product_viewer/widgets/containers/circle_gradient_container.dart';
 import 'package:product_viewer/widgets/loading/my_bloc_builder.dart';
@@ -36,14 +35,14 @@ class _CategoriesGridState extends State<CategoriesGrid> {
   @override
   Widget build(BuildContext context) {
     final categoriesCircleSize = context.screenWidth * 0.4;
-    return MyBlocBuilder<CategoriesBloc, CategoriesState, List<String>>(
-      mockDataToSkeletonize: locator<ProductRepository>().mockCategories(5),
-      builder: (context, categories) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Skeleton.keep(child: Text('Kategorie', style: context.textTheme.displayMedium)),
-            Center(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text('Kategorie', style: context.textTheme.displayMedium),
+        MyBlocBuilder<CategoriesBloc, CategoriesState, List<String>>(
+          mockDataToSkeletonize: locator<ProductRepository>().mockCategories(5),
+          builder: (context, categories) {
+            return Center(
               child: Wrap(
                 spacing: context.paddingScheme.p3,
                 runSpacing: context.paddingScheme.p3,
@@ -71,10 +70,10 @@ class _CategoriesGridState extends State<CategoriesGrid> {
                   },
                 ).toList(),
               ),
-            ),
-          ].withSpaceBetween(),
-        );
-      },
+            );
+          },
+        ),
+      ],
     );
   }
 }

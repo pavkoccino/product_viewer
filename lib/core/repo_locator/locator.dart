@@ -3,6 +3,8 @@ import 'package:product_viewer/features/products/repositories/product_repository
 
 final GetIt locator = GetIt.instance;
 
+/// Singleton provider, typically used for repositories, sharedPreferences, generally for stuff
+/// that should be created once and used across the app
 void setupLocator() {
   locator.registerLazySingleton<ProductRepository>(() => ProductRepositoryImpl());
 }

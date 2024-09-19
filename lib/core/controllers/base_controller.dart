@@ -7,6 +7,13 @@ import 'package:product_viewer/utils/logger.dart';
 
 typedef JSON = Map<String, dynamic>;
 
+/// `BaseController` is a centralized HTTP client controller designed to handle
+/// network requests across the application using the Dio package.
+///
+/// This class provides a set of reusable methods for making GET, POST, PUT, PATCH, and DELETE
+/// requests, each capable of handling different response formats such as strings, JSON objects,
+/// and lists of JSON objects. It also manages logging and error handling to ensure that network
+/// requests are traceable and predictable.
 class BaseController {
   final _log = getLogger(BaseController);
   late final Dio _dio;

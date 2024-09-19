@@ -7,9 +7,10 @@ import 'core/repo_locator/locator.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Initialize caching
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
   );
-  setupLocator();
+  setupLocator(); // Initialize GetIt singletons
   runApp(App());
 }
