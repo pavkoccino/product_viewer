@@ -17,4 +17,5 @@ class RatingModel {
   Map<String, dynamic> toJson() => _$RatingModelToJson(this);
 
   String get rateString => rate.toStringAsFixed(1);
+  String get countString => count.toString();
 }

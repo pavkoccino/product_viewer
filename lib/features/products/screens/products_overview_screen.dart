@@ -28,7 +28,10 @@ class ProductsOverviewScreen extends StatelessWidget {
                 final productBloc = BlocProvider.of<ProductBloc>(context);
                 productBloc.add(const LoadProductsEvent());
               },
-              child: ListView(physics: const BouncingScrollPhysics(), children: const [ProductsList()]));
+              child: ListView(
+                physics: const BouncingScrollPhysics(),
+                children: const [ProductsList()],
+              ));
         }),
       ),
     );
